@@ -1,0 +1,22 @@
+management:
+  server:
+    port: 8081
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+# https://resilience4j.readme.io/docs/circuitbreaker
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      failureRateThreshold: 1
+      minimumNumberOfCalls: 1
+      slidingWindowSize: 5
+  instances:
+    backend:
+      baseConfig: default
+      waitDurationInOpenState: 5000
